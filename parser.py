@@ -30,6 +30,14 @@ def parse_auth_line(line):
                "source_ip": source_ip
         }
 line ="May 28 08:01:12 webserver sshd[1001]: Failed password for root from 198.51.100.5 port 22"
-result = parse_auth_line(line)
-for key,value in result.items():
-        print(f"{key}: {value}")
+def parse_auth_file(filepath):
+    events =[]
+    with open(filepath, "r") as f:
+        for line in f:
+            result =parse_auth_line(line)
+            if result:
+                events.append(result)
+    return events
+events =parse_auth_file("sample_auth.log")
+for event in events:
+    print(event["timestamp"], "|", event["severity"], "|", event["source_ip"])
