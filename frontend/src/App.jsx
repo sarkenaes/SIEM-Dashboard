@@ -1,18 +1,35 @@
 import {useState, useEffect} from "react"
+import {BarChart,Bar, XAxis, YAxis, Tooltip,ResponsiveContainer} from "recharts"
 function App(){
 const [events, setEvents]=useState([])
 const [filter,setFilter]=useState("all")
+const [search, setSearch]=useState("")
 useEffect(() => {
   fetch("http://127.0.0.1:5000/api/events")
   .then(res => res.json())
   .then(data => setEvents(data.events))
 },[])  
-const filtered =filter=== "all"
-? events: events.filter(event => event.severity === filter)
+const filtered =events 
+  .filter( event => filter === "all" || event.severity === filter)
+  .filter(event => event.source_ip && event.source_ip.includes(search))
+const severityCounts =[
+  {name: "High",  count: events.filter(e=> e.severity === "high").length},
+  {name: "Medium",  count: events.filter(e=> e.severity === "medium").length},
+  {name: "Info",  count: events.filter(e=> e.severity === "info").length},
+  {name: "Low",  count: events.filter(e=> e.severity === "low").length},
+]
 return (
 <div style = {{padding : "20px", fontFamily: "monospace"}}>
   <h1>SIEM Dashboard</h1>
   <p>Total events: {events.length}</p>
+  <ResponsiveContainer width ="100%" height ={200}>
+    <BarChart data ={severityCounts}>
+      <XAxis dataKey="name"/>
+        <YAxis />
+      <Tooltip/>
+      <Bar dataKey ="count" fill ="#4f9cf9"/>      
+    </BarChart>
+  </ResponsiveContainer>
   <select onChange= {e=> setFilter(e.target.value)} style = {{marginBottom: "10px"}}>
     <option value="all">All</option>
     <option value="high">High</option>
@@ -20,6 +37,10 @@ return (
     <option value="info">Info</option>
     <option value="low">Low</option>
   </select>
+  <input type="text" placeholder="Search By IP"
+  onChange={e=> setSearch(e.target.value)}
+  style ={{marginBottom: "10px", marginLeft : "10px", padding: "4px"}}
+  />
    <table border ="1" cellPadding ="8" style ={{width: "100%", borderCollapse : "collapse"}}>
     <thead>
       <tr>
