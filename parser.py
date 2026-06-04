@@ -38,6 +38,3 @@ def parse_auth_file(filepath):
             if result:
                 events.append(result)
     return events
-events =parse_auth_file("sample_auth.log")
-for event in events:
-    print(event["timestamp"], "|", event["severity"], "|", event["source_ip"])

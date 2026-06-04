@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react"
-import {BarChart,Bar, XAxis, YAxis, Tooltip,ResponsiveContainer} from "recharts"
+import {BarChart,Bar, XAxis, YAxis, Tooltip,ResponsiveContainer, PieChart,Pie, Cell,Legend} from "recharts"
 function App(){
 const [events, setEvents]=useState([])
 const [filter,setFilter]=useState("all")
@@ -18,6 +18,12 @@ const severityCounts =[
   {name: "Info",  count: events.filter(e=> e.severity === "info").length},
   {name: "Low",  count: events.filter(e=> e.severity === "low").length},
 ]
+const COLORS ={
+  High: "#ef4444",
+  Medium: "#f97316",
+  Info: "#22c55e",
+  Low: "#94a3b8"
+}
 return (
 <div style = {{padding : "20px", fontFamily: "monospace"}}>
   <h1>SIEM Dashboard</h1>
@@ -30,6 +36,24 @@ return (
       <Bar dataKey ="count" fill ="#4f9cf9"/>      
     </BarChart>
   </ResponsiveContainer>
+  <ResponsiveContainer width ="100%" height ={300}>
+    <PieChart>
+      <Pie
+       data ={severityCounts}
+        dataKey= "count"
+        nameKey= "name"
+        cx ="50%"
+        cy="50%"
+        outerRadius ={80}
+        label>
+          {severityCounts.map((entry,index)=>(
+            <Cell key={index} fill ={COLORS[entry.name]}/>
+          ))}
+      </Pie>
+        <Tooltip />
+        <Legend />
+    </PieChart>
+  </ResponsiveContainer >
   <select onChange= {e=> setFilter(e.target.value)} style = {{marginBottom: "10px"}}>
     <option value="all">All</option>
     <option value="high">High</option>
