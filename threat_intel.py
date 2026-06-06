@@ -1,5 +1,8 @@
 import requests
-ABUSEIPBD_KEY ="ff43cb8f8d93b87e26ec8b4caa80d44ec0798744e6ed4b422e763c901bfc5a8135bee187752b5372"
+import os
+from dotenv import load_dotenv
+load_dotenv
+ABUSEIPBD_KEY= os.getenv("ABUSEIPBD_KEY")
 def check_ip(ip):
     if not ip:
         return None
