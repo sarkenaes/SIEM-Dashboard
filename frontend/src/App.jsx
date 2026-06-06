@@ -4,15 +4,31 @@ function App(){
 const [events, setEvents]=useState([])
 const [filter,setFilter]=useState("all")
 const [search, setSearch]=useState("")
-useEffect(() => {
-  fetch("http://127.0.0.1:5000/api/events")
-  .then(res => res.json())
+const [alerts,setAlerts]=useState([])
+const [page, setPage]= useState(0)
+const pageSize= 10
+useEffect(()=>{
+const fetchData= () =>{
+  fetch("http://localhost:5000/api/events")
+  .then(res=>res.json())
   .then(data => setEvents(data.events))
-},[])  
+  fetch ("http://localhost:5000/api/alerts")
+   .then(res => res.json())
+   .then(data => setAlerts(data.alerts || []))
+ 
+}
+fetchData()
+const interval =setInterval(fetchData, 30000)
+return () => clearInterval(interval)
+},[])
 const filtered =events 
   .filter( event => filter === "all" || event.severity === filter)
   .filter(event => event.source_ip && event.source_ip.includes(search))
-const severityCounts =[
+const paginated= filtered.slice(page*pageSize,(page+1) *pageSize)
+useEffect(() => {
+  setPage(0)
+}, [filter, search])
+  const severityCounts =[
   {name: "High",  count: events.filter(e=> e.severity === "high").length},
   {name: "Medium",  count: events.filter(e=> e.severity === "medium").length},
   {name: "Info",  count: events.filter(e=> e.severity === "info").length},
@@ -28,6 +44,39 @@ return (
 <div style = {{padding : "20px", fontFamily: "monospace"}}>
   <h1>SIEM Dashboard</h1>
   <p>Total events: {events.length}</p>
+  <div style={{display:"flex", gap:"16px", marginBottom:"20px"}}>
+  <div style={{background:"#1e293b", padding:"16px", borderRadius:"8px", flex:1, textAlign:"center"}}>
+    <div style={{color:"#94a3b8", fontSize:"13px"}}>Total Events</div>
+    <div style={{color:"white", fontSize:"28px", fontWeight:"bold"}}>{events.length}</div>
+  </div>
+  <div style={{background:"#1e293b", padding:"16px", borderRadius:"8px", flex:1, textAlign:"center"}}>
+    <div style={{color:"#94a3b8", fontSize:"13px"}}>High Severity</div>
+    <div style={{color:"#ef4444", fontSize:"28px", fontWeight:"bold"}}>
+      {events.filter(e => e.severity === "high").length}
+    </div>
+  </div>
+  <div style={{background:"#1e293b", padding:"16px", borderRadius:"8px", flex:1, textAlign:"center"}}>
+    <div style={{color:"#94a3b8", fontSize:"13px"}}>Active Alerts</div>
+    <div style={{color:"#f97316", fontSize:"28px", fontWeight:"bold"}}>{alerts.length}</div>
+  </div>
+  <div style={{background:"#1e293b", padding:"16px", borderRadius:"8px", flex:1, textAlign:"center"}}>
+    <div style={{color:"#94a3b8", fontSize:"13px"}}>Unique IPs</div>
+    <div style={{color:"#4f9cf9", fontSize:"28px", fontWeight:"bold"}}>
+      {new Set(events.map(e => e.source_ip)).size}
+    </div>
+  </div>
+</div>
+  {alerts.length >0 && (
+    <div style ={{background: "#7f1d1d", padding:"10px", marginBottom:"20px", borderRadius : "6px"}}>
+      <h3 style ={{ color: "#fca5a5", margin: "0 0 8px 0"}}>🚨 Active Alerts ({alerts.length})</h3>
+      {alerts.map(alert =>(
+        <div key = {alert.id} style ={{color: "#fca5a5", marginBottom: "4px"}}>
+          HIGH | {alert.source_ip }| {alert.message}
+        </div>
+      ))}
+    </div>
+
+  )}
   <ResponsiveContainer width ="100%" height ={200}>
     <BarChart data ={severityCounts}>
       <XAxis dataKey="name"/>
@@ -76,9 +125,22 @@ return (
       </tr>
     </thead>
     <tbody>
-      {filtered.map(event =>(
+      {paginated.map(event =>(
         <tr key={event.id}>
         <td>{event.timestamp}</td>
+        <td>
+          {event.source_ip}
+          {event.source_ip && (
+          <button 
+            onClick={()=>{
+              fetch(`http://localhost:5000/api/threat/${event.source_ip}`)
+                .then(res=>res.json())
+                .then(data => alert(`IP: ${data.ip}\nAbuse Score: ${data.abuse_score}\nCountry: ${data.country}\nMalicious: ${data.is_malicious}`))
+            }}
+            style={{marginLeft: "8px", fontSize: "11px", cursor: "pointer"}}
+          > 🔍</button>
+          )}
+        </td>
         <td>{event.host}</td>
         <td style={{ 
   color: event.severity === "high" ? "red" : 
@@ -91,6 +153,25 @@ return (
       ))}
     </tbody>
    </table>
+   <div style={{display:"flex", gap:"10px", marginTop:"10px", alignItems:"center"}}>
+  <button 
+    onClick={() => setPage(p => p - 1)} 
+    disabled={page === 0}
+    style={{padding:"6px 12px", cursor:"pointer"}}
+  >
+    ← Previous
+  </button>
+  <span style={{color:"white"}}>
+    Page {page + 1} of {Math.ceil(filtered.length / pageSize)}
+  </span>
+  <button 
+    onClick={() => setPage(p => p + 1)} 
+    disabled={(page + 1) * pageSize >= filtered.length}
+    style={{padding:"6px 12px", cursor:"pointer"}}
+  >
+    Next →
+  </button>
+</div>
 </div>)
 }
 export default App

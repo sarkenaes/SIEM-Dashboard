@@ -9,3 +9,52 @@ May 28 14:00:00 webserver sshd[9999]: Failed password for root from 1.2.3.4 port
 May 28 14:00:00 webserver sshd[9999]: Failed password for root from 1.2.3.4 port 22
 May 28 14:00:00 webserver sshd[9999]: Failed password for root from 1.2.3.4 port 22
 May 28 14:00:00 webserver sshd[9999]: Failed password for root from 1.2.3.4 port 22
+Jun 04 00:01:24 ubuntu-siem-lab sshd[1202]: Failed password for backup from 103.27.202.88 port 49289 ssh2
+Jun 04 00:02:36 ubuntu-siem-lab CRON[1202]: (root) CMD (/usr/lib/apt/apt.systemd.daily)
+Jun 04 00:03:06 ubuntu-siem-lab systemd[1719]: Started OpenBSD Secure Shell server.
+Jun 04 00:03:37 linux-node01 CRON[1202]: (root) CMD (/usr/bin/find /tmp -type f -mtime +7 -delete)
+Jun 04 00:04:34 linux-node01 sshd[1203]: Failed password for root from 10.0.0.5 port 7722 ssh2
+Jun 04 00:05:22 linux-node01 CRON[1203]: (backup) CMD (/usr/bin/python3 /opt/siem/collect_logs.py)
+Jun 04 00:06:33 ubuntu-siem-lab NetworkManager[1206]: manager: NetworkManager state is now CONNECTED_GLOBAL
+Jun 04 00:07:46 linux-node01 apache2: 192.168.1.15 - - [04/Jun/2026:00:07:46 +0000] "HEAD /index.html HTTP/1.1" 200 2570 "-" "curl/8.0.1"
+Jun 04 00:07:59 ubuntu-siem-lab apache2: 10.0.0.5 - - [04/Jun/2026:00:07:59 +0000] "GET /../../../../etc/passwd HTTP/1.1" 403 3110 "-" "python-requests/2.31"
+Jun 04 00:08:28 web-server01 sshd[1211]: Accepted publickey for nahom from 192.168.1.15 port 36029 ssh2: RSA SHA256:86214b1b462c040968e2e127
+Jun 04 00:09:45 linux-node01 sudo:   developer : TTY=pts/0 ; PWD=/home/developer ; USER=root ; COMMAND=/usr/bin/apt install nginx -y
+Jun 04 00:09:46 linux-node01 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by developer(uid=1000)
+Jun 04 00:09:48 linux-node01 sudo: pam_unix(sudo:session): session closed for user root
+Jun 04 00:11:15 linux-node01 CRON[1215]: (nahom) CMD (/bin/bash /tmp/cleanup.sh)
+Jun 04 00:12:17 web-server01 sshd[1215]: Connection closed by authenticating user root 192.168.1.10 port 45700 [preauth]
+Jun 04 00:12:54 web-server01 sudo:   developer : TTY=pts/3 ; PWD=/home/developer ; USER=root ; COMMAND=/bin/systemctl restart apache2
+Jun 04 00:12:55 web-server01 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by developer(uid=1000)
+Jun 04 00:13:30 web-server01 kernel: [UFW ALLOW] IN=eth0 OUT= MAC=00:16:3e:12:34:56 SRC=192.168.1.15 DST=192.168.1.20 LEN=60 TOS=0x00 PREC=0x00 TTL=57 ID=63488 DF PROTO=UDP SPT=11611 DPT=6379 WINDOW=64240 RES=0x00 SYN URGP=0
+Jun 04 00:14:40 ubuntu-siem-lab CRON[1220]: (root) CMD (/usr/lib/apt/apt.systemd.daily)
+Jun 04 00:15:29 linux-node01 sshd[1221]: Accepted publickey for www-data from 192.168.1.10 port 6637 ssh2: RSA SHA256:cee9f270036588d11c4a11ac
+Jun 04 00:16:52 ubuntu-siem-lab sshd[1221]: Failed password for backup from 192.168.1.10 port 34719 ssh2
+Jun 04 00:17:57 ubuntu-siem-lab systemd[1668]: Reached target Multi-User System.
+Jun 04 00:18:24 ubuntu-siem-lab sshd[1227]: error: maximum authentication attempts exceeded for root from 172.16.0.22 port 31630 ssh2 [preauth]
+Jun 04 00:18:33 web-server01 CRON[1227]: (root) CMD (/usr/bin/python3 /opt/siem/collect_logs.py)
+Jun 04 00:19:19 ubuntu-siem-lab sshd[1228]: Failed password for admin from 192.168.1.15 port 28672 ssh2
+Jun 04 00:19:53 ubuntu-siem-lab systemd[61]: Started OpenBSD Secure Shell server.
+Jun 04 00:20:07 ubuntu-siem-lab sshd[1231]: Failed password for admin from 172.16.0.22 port 60166 ssh2
+Jun 04 00:20:10 linux-node01 sshd[1234]: Accepted publickey for nahom from 5.188.206.45 port 44400 ssh2: RSA SHA256:030bb4bb9fbcfcc16d1bc742
+Jun 04 00:20:39 web-server01 kernel: [27154.804318] TCP: request_sock_TCP: Possible SYN flooding on port 22. Sending cookies.
+Jun 04 00:22:04 linux-node01 systemd[2307]: Stopping User Manager for UID 1000...
+Jun 04 00:22:19 ubuntu-siem-lab systemd[1001]: Started Daily apt download activities.
+Jun 04 00:23:09 linux-node01 sshd[1239]: error: maximum authentication attempts exceeded for root from 192.168.1.10 port 44793 ssh2 [preauth]
+Jun 04 00:23:50 web-server01 sshd[1240]: Accepted password for saron from 185.220.101.37 port 49679 ssh2
+Jun 04 00:23:51 web-server01 sshd[1240]: pam_unix(sshd:session): session opened for user saron(uid=1002) by (uid=0)
+Jun 04 00:25:10 ubuntu-siem-lab kernel: [44600.629959] Out of memory: Killed process 1241 (python3) total-vm:512000kB
+Jun 04 00:26:15 linux-node01 dockerd[1241]: time="2026-06-04T00:26:15" level=info msg="Container started" container=siem-dashboard
+Jun 04 00:27:39 linux-node01 apache2: 192.168.1.10 - - [04/Jun/2026:00:27:39 +0000] "HEAD /phpmyadmin HTTP/1.1" 200 1523 "-" "python-requests/2.31"
+Jun 04 00:28:38 web-server01 kernel: [29536.672092] eth0: link becomes ready
+Jun 04 00:28:45 linux-node01 CRON[1242]: (nahom) CMD (/usr/local/bin/backup.sh)
+Jun 04 00:28:53 linux-node01 sudo:   admin : TTY=pts/1 ; PWD=/home/admin ; USER=root ; COMMAND=/bin/systemctl status docker
+Jun 04 00:28:54 linux-node01 sudo: pam_unix(sudo:session): session opened for user root(uid=0) by admin(uid=1005)
+Jun 04 00:29:01 linux-node01 sudo: pam_unix(sudo:session): session closed for user root
+Jun 04 00:30:07 linux-node01 NetworkManager[1243]: device (eth0): state change: disconnected -> prepare
+Jun 04 00:30:30 ubuntu-siem-lab dockerd[1243]: time="2026-06-04T00:30:30" level=warning msg="Health check failed" container=log-parser
+Jun 04 00:31:15 linux-node01 apache2: 10.0.0.5 - - [04/Jun/2026:00:31:15 +0000] "POST /login HTTP/1.1" 200 4055 "-" "Mozilla/5.0"
+Jun 04 00:31:46 ubuntu-siem-lab apache2: 10.0.0.5 - - [04/Jun/2026:00:31:46 +0000] "GET /wp-login.php HTTP/1.1" 301 1782 "-" "Mozilla/5.0"
+Jun 04 00:32:40 linux-node01 sshd[1247]: Accepted publickey for admin from 10.0.0.5 port 24036 ssh2: RSA SHA256:4ad2f2bd7547d602b7a057c4
+Jun 04 00:34:02 linux-node01 kernel: [76469.424308] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: errors=remount-ro
+Jun 04 00:35:30 linux-node01 sudo:   saron : TTY=pts/3 ; PWD=/home/saron ; USER=root ; COMMAND=/bin/systemctl status docker

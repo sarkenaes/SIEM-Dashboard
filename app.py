@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from alerts import check_brute_force
 import sqlite3
+from threat_intel import check_ip
 app = Flask(__name__)
 CORS(app)
 DB_PATH ="siem.db"
@@ -31,6 +33,14 @@ def get_by_severity(severity):
     conn.close()
     events= [dict(row) for row in rows]
     return jsonify({"events": events, "total" : len(events)})
+@app.route("/api/threat/<ip>")
+def get_threat(ip):
+    result =check_ip(ip)
+    return jsonify(result)
+@app.route("/api/alerts")
+def get_alerts():
+     alerts= check_brute_force()
+     return jsonify({"alerts": alerts, "total": len(alerts)})
 if __name__=="__main__":
     app.run(debug=True, port=5000)
 
