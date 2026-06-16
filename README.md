@@ -132,26 +132,4 @@ SSH into the machine a few times to generate real authentication events.
 
 
 
-    Interactive dashboard — React frontend with live charts, severity filtering, IP search, and pagination
-    Alert banner — prominent real-time display of active security incidents
-    REST API — Flask backend with endpoints for events, alerts, and threat intel lookups
-    Dockerized — runs with a single docker-compose up command
-Structure
-SIEM-Dashboard/
-├── app.py              # Flask REST API
-├── parser.py           # Log file parser
-├── database.py         # SQLite database layer
-├── watcher.py          # Real-time log file monitor
-├── alerts.py           # Brute force detection engine
-├── threat_intel.py     # AbuseIPDB integration
-├── requirements.txt    # Python dependencies
-├── Dockerfile          # Backend container
-├── docker-compose.yml  # Multi-container orchestration
-└── frontend/
-    ├── src/
-    │   ├── App.jsx     # Main dashboard component
-    │   └── main.jsx    # React entry point
-    └── Dockerfile      # Frontend container (Nginx)
-Tech Stack
-
-LayerTechnologyBackendPython, Flask, SQLiteFrontendReact, RechartsReal-timePython WatchdogThreat IntelAbuseIPDB APIDeploymentDocker, Docker Compose
+    
