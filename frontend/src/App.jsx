@@ -119,6 +119,7 @@ return (
       <tr>
         <th>Timestamp</th>
         <th>Host</th>
+        <th>Source</th>
         <th>Severity</th>
         <th>Source IP</th>
         <th>Message</th>
