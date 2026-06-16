@@ -1,12 +1,6 @@
 SIEM Dashboard
 A full-stack Security Information and Event Management (SIEM) platform built from scratch. Ingests authentication logs in real time, detects brute force attacks through correlation rules, enriches source IPs with threat intelligence and visualizes security incidents on an interactive React dashboard.
-Features
-    Real-time log ingestion — monitors Linux auth.log files using Python Watchdog, processing new events the moment they're written
-    Brute force detection — correlation engine flags IPs with 3+ failed login attempts automatically
-    Threat intelligence — integrates AbuseIPDB API to check source IPs against a global database of known malicious addresses SIEM Dashboard
-
-A  full-stack **Security Information and Event Management (SIEM)** platform built from scratch. Ingests Linux authentication logs in real time, detects brute force attacks through correlation rules, checks source IPs with threat intelligence and visualizes security incidents on an interactive React dashboard.
-![dashbroard Preview](screenshots/screenshot 1)
+![Dashboard Preview](/screenshots/Screenshot%201.png)
 ## Features
 
 - **Real-time log ingestion** — monitors Linux `auth.log` files using Python Watchdog, processing new events the moment they're written
