@@ -3,6 +3,7 @@
 SIEM Dashboard
 A full-stack Security Information and Event Management (SIEM) platform built from scratch. Ingests authentication logs in real time, detects brute force attacks through correlation rules, enriches source IPs with threat intelligence and visualizes security incidents on an interactive React dashboard.
 ![Dashboard Preview](/screenshots/Screenshot%201.png)
+![Charts Preview](/screenshots/Screenshot%202.png)
 ## Features
 
 - **Real-time log ingestion** — monitors Linux `auth.log` files using Python Watchdog, processing new events the moment they're written
