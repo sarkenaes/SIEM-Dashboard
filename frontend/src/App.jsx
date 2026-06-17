@@ -124,34 +124,33 @@ return (
     <th>Message</th>
   </tr>
 </thead>
-    <tbody>
-      {paginated.map(event =>(
-        <tr key={event.id}>
-        <td>{event.timestamp}</td>
-        <td>
-          {event.source_ip}
-          {event.source_ip && (
+   <tbody>
+  {paginated.map(event => (
+    <tr key={event.id}>
+      <td>{event.timestamp}</td>
+      <td>
+        {event.source_ip}
+        {event.source_ip && (
           <button 
-            onClick={()=>{
+            onClick={() => {
               fetch(`http://localhost:5000/api/threat/${event.source_ip}`)
-                .then(res=>res.json())
+                .then(res => res.json())
                 .then(data => alert(`IP: ${data.ip}\nAbuse Score: ${data.abuse_score}\nCountry: ${data.country}\nMalicious: ${data.is_malicious}`))
             }}
             style={{marginLeft: "8px", fontSize: "11px", cursor: "pointer"}}
-          > 🔍</button>
-          )}
-        </td>
-        <td>{event.host}</td>
-        <td style={{ 
-  color: event.severity === "high" ? "red" : 
-         event.severity === "medium" ? "orange" : 
-         event.severity === "info" ? "green" : "white"
-}}>{event.severity}</td>
-        <td>{event.source_ip}</td>
-        <td>{event.message}</td>
-        </tr>
-      ))}
-    </tbody>
+          >🔍</button>
+        )}
+      </td>
+      <td>{event.host}</td>
+      <td style={{ 
+        color: event.severity === "high" ? "red" : 
+               event.severity === "medium" ? "orange" : 
+               event.severity === "info" ? "green" : "white"
+      }}>{event.severity}</td>
+      <td>{event.message}</td>
+    </tr>
+  ))}
+</tbody>
    </table>
    <div style={{display:"flex", gap:"10px", marginTop:"10px", alignItems:"center"}}>
   <button 
