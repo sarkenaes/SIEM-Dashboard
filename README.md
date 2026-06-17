@@ -125,7 +125,7 @@ volumes:
 ```
 
 SSH into the machine a few times to generate real authentication events.
-## Demonstartaion 
+## Demonstrataion 
 ![Dashboard Preview](/screenshots/Screenshot%201.png)
 ![Charts Preview](/screenshots/Screenshot%202.png)
 
