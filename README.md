@@ -1,7 +1,7 @@
 ## Description
 
-SIEM Dashboard
-A full-stack Security Information and Event Management (SIEM) platform built from scratch. Ingests authentication logs in real time, detects brute force attacks through correlation rules, enriches source IPs with threat intelligence and visualizes security incidents on an interactive React dashboard.
+
+A full-stack Security Information and Event Management (SIEM) platform built from scratch. Ingests authentication logs in real time, detects brute force attacks through correlation rules, checks source IPs with threat intelligence and visualizes security incidents on an interactive React dashboard.
 
 ## Features
 
