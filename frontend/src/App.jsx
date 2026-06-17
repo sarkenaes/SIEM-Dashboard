@@ -115,16 +115,15 @@ return (
   style ={{marginBottom: "10px", marginLeft : "10px", padding: "4px"}}
   />
    <table border ="1" cellPadding ="8" style ={{width: "100%", borderCollapse : "collapse"}}>
-    <thead>
-      <tr>
-        <th>Timestamp</th>
-        <th>Host</th>
-        <th>Source</th>
-        <th>Severity</th>
-        <th>Source IP</th>
-        <th>Message</th>
-      </tr>
-    </thead>
+  <thead>
+  <tr>
+    <th>Timestamp</th>
+    <th>Host</th>
+    <th>Severity</th>
+    <th>Source IP</th>
+    <th>Message</th>
+  </tr>
+</thead>
     <tbody>
       {paginated.map(event =>(
         <tr key={event.id}>
