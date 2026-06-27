@@ -44,5 +44,5 @@ def get_alerts():
      return jsonify({"alerts": alerts, "total": len(alerts)})
 if __name__ == "__main__":
     debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
-    app.run(debug=debug_mode, host="0.0.0.0", port=5000)
-
+    host = os.environ.get("HOST", "127.0.0.1")
+    app.run(debug=debug_mode, host=host, port=5000)
