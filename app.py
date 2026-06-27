@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from alerts import check_brute_force
 import sqlite3
+import os
 from threat_intel import check_ip
 app = Flask(__name__)
 CORS(app)
@@ -41,6 +42,7 @@ def get_threat(ip):
 def get_alerts():
      alerts= check_brute_force()
      return jsonify({"alerts": alerts, "total": len(alerts)})
-if __name__=="__main__":
-    app.run(debug=True,host ="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    debug_mode = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
+    app.run(debug=debug_mode, host="0.0.0.0", port=5000)
 
