@@ -5,7 +5,7 @@ import sqlite3
 import os
 from threat_intel import check_ip
 app = Flask(__name__)
-CORS(app)
+CORS(app,origins=["http://localhost:3000"])
 DB_PATH ="siem.db"
 def get_db():
     conn = sqlite3.connect(DB_PATH)
