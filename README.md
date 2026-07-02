@@ -126,8 +126,10 @@ volumes:
 
 SSH into the machine a few times to generate real authentication events.
 ## Demonstrataion 
+[Watch Dashboard Demo](screenshots/For%20you%20_%20Loom%20-%202%20July%202026.mp4)
 ![Dashboard Preview](/screenshots/Screenshot%201.png)
 ![Charts Preview](/screenshots/Screenshot%202.png)
+
 
 
     
